@@ -21,7 +21,7 @@ const EmailStep: React.FC<EmailStepProps> = ({ onVerified }) => {
 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+    <form  className="flex flex-col gap-5">
   
       <CardHeader className='p-0 pt-5'>
         <CardTitle>Forgot password</CardTitle>
@@ -50,7 +50,7 @@ const EmailStep: React.FC<EmailStepProps> = ({ onVerified }) => {
         <button type="button" className="bg-gray-100 px-4 py-2 rounded-md">
           Back
         </button>
-        <button type="submit" className="bg-black text-white px-4 py-2 rounded-md">
+        <button onClick={handleSubmit(onSubmit)} type="button" className="bg-black text-white px-4 py-2 rounded-md">
           Verify
         </button>
       </div>
