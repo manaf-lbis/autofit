@@ -1,9 +1,9 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document,Types } from 'mongoose';
 import { User } from '../types/user';
 
-interface userDocument extends User, Omit<Document,'_id'> {}
+interface userDocument extends User,Document<Types.ObjectId> {}
 
-const userSchema: Schema = new Schema({
+const userSchema: Schema <userDocument> = new Schema<userDocument>({
     name: {
         type: String,
         required: true

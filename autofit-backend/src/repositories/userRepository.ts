@@ -1,12 +1,22 @@
 import { User } from "../types/user";
 import { IUserRepository } from "./interfaces/IUserRepository";
 import { UserModel } from "../models/userModel";
+import { CreateUserInput } from "../types/user/userInput";
 
 
 export class UserRepository implements IUserRepository {
 
     async findAll(): Promise<User[] | null> {
        return await UserModel.find()
+    }
+
+    async create(user: CreateUserInput): Promise<User> {
+        const newUser = new UserModel({
+          ...user
+        })
+
+        await newUser.save()
+        return newUser.toObject();
     }
 
     async findByEmail(email: string): Promise<User | null> {
@@ -29,5 +39,7 @@ export class UserRepository implements IUserRepository {
     async delete(id: string): Promise<void> {
         await UserModel.findByIdAndDelete(id)
     }
+
+   
 
 }
