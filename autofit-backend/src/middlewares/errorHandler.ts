@@ -6,7 +6,7 @@ export const errorHandler = (err: ApiError,req: Request,res: Response,next: Next
   const message = err.message || 'Something went wrong';
 
   res.status(statusCode).json({
-    success: false,
+    success: 'error',
     message,
     statusCode,
     data: null

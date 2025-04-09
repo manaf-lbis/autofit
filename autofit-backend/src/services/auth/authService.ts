@@ -1,11 +1,11 @@
 import { IUserRepository } from "../../repositories/interfaces/IUserRepository";
-import bcrypt from 'bcrypt'
 import { OtpService } from "../otp/otpService";
 import { IOtpRepository } from "../../repositories/interfaces/IOtpRepository";
 import { HashService } from "../hash/hashService";
 import { TokenService } from "../token/tokenService";
 import { ApiError } from "../../utils/apiError";
-import { UserRegistrationService } from "../user/userRegistrationService";
+
+
 
 export class AuthService {
 

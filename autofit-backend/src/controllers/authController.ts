@@ -3,6 +3,7 @@ import { AuthService } from "../services/auth/authService";
 import { loginValidation, signupValidation } from "../validation/authValidation";
 import { UserRegistrationService } from "../services/user/userRegistrationService";
 import { CustomJwtPayload } from "../types/express/index";
+import { sendSuccess, StatusCode } from "../utils/apiResponse";
 
 export class AuthController {
     constructor(
@@ -24,7 +25,9 @@ export class AuthController {
                 maxAge: 60 * 60 * 1000
             });
 
-            res.status(200).json({ status: 'success', data: result.user });
+            // res.status(200).json({ status: 'success', data: result.user });
+            sendSuccess(res,'Login SuccessFull',result.user)
+
         } catch (error: any) {
             next(error);
         }
@@ -43,8 +46,8 @@ export class AuthController {
                 sameSite: 'strict',
                 maxAge: 60 * 60 * 1000
             });
+            sendSuccess(res,result.message)
 
-            res.status(200).json({ status: 'success', message: result.message });
         } catch (error: any) {
             next(error);
         }
@@ -66,7 +69,7 @@ export class AuthController {
             }
 
             await this.authService.verifyOtp(otp, email);
-            await this.userRegistrationService.registerUser({ 
+           const user =  await this.userRegistrationService.registerUser({ 
                 name, 
                 email, 
                 password, 
@@ -74,7 +77,8 @@ export class AuthController {
                 role: role || 'user' 
             });
 
-            res.status(200).json({ status: 'success', message: 'OTP verified successfully' });
+            sendSuccess(res,'OTP verified successfully',user,StatusCode.CREATED)
+
         } catch (error: any) {
             next(error);
         }
